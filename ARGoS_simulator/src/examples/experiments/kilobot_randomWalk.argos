@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <!-- random_seed="125" -->
+
+  <framework>
+    <system threads="0" />
+    <experiment length="2000"
+                ticks_per_second="10"
+                 />
+  </framework>
+
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+
+    <kilobot_controller id="kbc">
+      <actuators>
+        <kilobot_communication implementation="default" />
+        <differential_steering implementation="default" />
+        <kilobot_led implementation="default" />
+      </actuators>
+      <sensors>
+        <kilobot_communication implementation="default" medium="kilocomm" show_rays="true" />
+        <kilobot_light implementation="rot_z_only" show_rays="true" />
+      </sensors>
+      <params behavior="build/examples/behaviors/random_walk" />
+    </kilobot_controller>
+
+  </controllers>
+
+   <!-- ****************** -->
+  <!-- * Loop functions * -->
+  <!-- ****************** -->
+   <loop_functions library="build/examples/loop_functions/trajectory_loop_functions/libtrajectory_loop_functions"
+                  label="trajectory_loop_functions" />
+
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="1, 1, 1.0" center="0,0,0.5">
+
+    <box id="wall_north" size="1.05,0.05,0.1" movable="false">
+      <body position="0,0.5,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_south" size="1.05,0.05,0.1" movable="false">
+      <body position="0,-0.5,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_east" size="0.05,1,0.1" movable="false">
+      <body position="0.5,0,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_west" size="0.05,1,0.1" movable="false">
+      <body position="-0.5,0,0" orientation="0,0,0" />
+    </box>
+
+
+   <light id="l0"
+    position="-0.49,0,0.5"
+    orientation="0,0,0"
+    color="yellow"
+    intensity="5.0"
+    medium="leds"
+    grid_size="4, 4, 1" />
+
+    <!-- <distribute>
+     <position method="uniform" min="-1,-1,0" max="1,1,0" />
+     <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
+     <entity quantity="1" max_trials="1">
+       <kilobot id="kb0">
+         <controller config="kb0" />>
+         </kilobot>
+     </entity>
+   </distribute> -->
+
+   <kilobot id="kb0">
+     <body position="0.0,0.0,0" orientation="-2,0,0" />
+     <controller config="kbc" />>
+   </kilobot>
+
+
+  </arena>
+
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+  <physics_engines>
+    <dynamics2d id="dyn2d" />
+  </physics_engines>
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media>
+    <range_and_bearing id="rab" />
+    <kilobot_communication id="kilocomm" />
+    <led id="leds" />
+  </media>
+
+
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+
+
+  <visualization>
+    <qt-opengl>
+      <camera>
+        <placement idx="0" position="0,0,1" look_at="0,0,0" lens_focal_length="20" />
+        <placement idx="1" position="0.5,0.5,0.5" look_at="0,0,0" lens_focal_length="20" />
+        <placement idx="2" position="0.5,0.5,0.5" look_at="0.5,0.5,0" lens_focal_length="20" />
+      </camera>
+    </qt-opengl>
+  </visualization>
+
+</argos-configuration>
