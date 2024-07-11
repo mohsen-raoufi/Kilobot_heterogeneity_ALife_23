@@ -4,10 +4,3 @@ The repo includes the implementation of inter-individual variations in heading b
 
 Based on the main repository of Kilobot simulator in ARGoS developed by Carlo Pinciroli: https://github.com/ilpincy/argos3-kilobot
 
-- [x] Add figures
-- [ ] Update the bash files
-- [ ] Add the post-pro files
-    - [ ]  for simulation
-    - [ ]  for real robot experiments
-- [ ] Add the TeX project
-- [ ] Add real robot codes for phototaxis in a separate folder
